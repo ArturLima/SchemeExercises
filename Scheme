@@ -1,0 +1,243 @@
+adicionar +1 na lista
+(define sum1
+  (lambda(my_list)
+    (cond
+      [(null?  (cdr my_list))
+        (list (+(car my_list)1))
+       ]
+    [else
+     (cons (+(car my_list)1) (sum1 (cdr my_list)))
+     ]
+    )
+  )  
+)
+; adicionar item no fim da lista
+(define fim
+  (lambda(my_list x)
+    (cond
+      [(null? my_list)
+        (list x)
+       ]
+     [else
+        ( cons (car my_list) (fim (cdr my_list) x ))
+      ]
+      )
+    )
+  )
+
+;retornar uma posicao
+(define retoronarPosicaoelemento
+    (lambda (my_list elemento)
+          (cond
+            [(null? my_list)
+              1000
+             ]
+            [(equal? (car my_list) elemento)
+               0
+             ]
+           [else
+              (+ 1  (retoronarPosicaoelemento(cdr my_list) elemento))
+            ]
+            )
+      )
+  )
+;Retornar elemento de uma posicao
+(define  retonarElementoPosicao
+  (lambda (my_list posicao)
+    (cond
+      [(null? my_list)
+         #f
+      ]
+      [(< posicao 0)
+          #f
+      ] 
+      [(equal? 0 posicao)
+       (car my_list)
+      ]
+      [else
+        (retonarElementoPosicao(cdr my_list) (- posicao 1))
+       ]
+      )
+    )
+  )
+
+;Receber uma lista e retornar a media
+;(10 20 30) = 60
+(define somarLista
+  (lambda (my_list)
+      (cond
+        [(null? my_list)
+          0
+        ]
+        [else
+         (+ (car my_list) (somarLista(cdr my_list)))
+        ]
+      )
+    )
+  )
+  (define quantidadeLista
+    (lambda (my_list)
+      (cond
+          [(null? my_list)
+            0
+           ]
+         [else
+            (+ 1 (quantidadeLista(cdr my_list)))
+          ]
+          
+        )
+      )
+    )
+(define media
+  (lambda (my_list)
+    (/ (somarLista my_list) (quantidadeLista my_list))
+    )
+  )
+
+; criar lista com começo e fim
+(define criar_lista
+  (lambda (comeco fim)
+    (cond
+      [(> comeco fim)
+        (list)
+       ]
+      [(equal? comeco fim)
+       (list fim)
+       ]
+      [else
+       (cons comeco
+        (criar_lista (+ comeco 1) fim)
+        )
+       ]
+      )
+    )
+  )
+
+;criar lista do 1 ao fim
+(define criar1aN
+  (lambda (n)
+      (criar_lista 1 n)
+    )
+  )
+;concatenar 2 listas
+(define concatenar2Lista
+  (lambda (lista1 lista2)
+    (cond
+      [(null? lista1)
+        lista2
+       ]
+     
+      [else
+        (cons (car lista1) (concatenar2Lista(cdr lista1) lista2 ))
+       ]
+      )
+    )
+  )
+
+;remover todos os numeros pares
+(define removerPares
+  (lambda(my_list)
+    (cond
+      [(null? my_list)
+          (list)
+       ]
+      [(even? (car my_list))
+          (removerPares (cdr my_list))
+       ]
+      [else
+        (cons (car my_list) (removerPares (cdr my_list)))
+       ]
+      )
+    )
+  )
+
+
+;Remover ultimo elemento da lista
+
+(define removerUltimoelemento
+  (lambda (my_list)
+    (cond
+        [(null? my_list)
+          (list)
+         ]
+       [(null? (cdr my_list))
+          (list)
+        ]
+       [else
+        (cons (car my_list) (removerUltimoelemento(cdr my_list)))
+        ]
+      )
+    )
+)
+
+;incluir elemento em uma posicao
+
+(define incluirElementoPosicao
+  (lambda (my_list elemento posicao)
+      (cond
+        [(null? my_list)
+            (list elemento)
+         ]
+        [(< posicao 0)
+           #f
+         ]
+        [(equal? posicao 0)
+          (cons elemento my_list)
+         ]
+        [else
+         (cons (car my_list) (incluirElementoPosicao(cdr my_list) elemento (- posicao 1)) )
+         ]
+        )
+    )
+  )
+
+
+;remover os numeros igual o numero passado
+(define removerOcorrencias
+  (lambda (my_list numero)
+      (cond
+        [(null? my_list)
+          (list)
+         ]
+          [(equal? numero (car my_list))
+            (removerOcorrencias(cdr my_list) numero)
+           ]
+        [else
+            (cons (car my_list) (removerOcorrencias(cdr my_list) numero))
+         ]
+        )
+    )
+  )
+
+
+;remover todos os elementos repetidos
+(define removerRepetidos
+  (lambda(my_list)
+      (cond
+        [(null? my_list)
+            (list)
+         ]
+        [else
+          (cons 
+                (car my_list) 
+               (removerRepetidos(removerOcorrencias(cdr my_list) (car my_list)))
+          )   
+         ]
+        )
+    )
+  )
+
+
+;;add elemento no final da lista
+(define addultimo
+  (lambda ( my_list x)
+    (cond
+      [(null? my_list)
+        (list x)
+       ]
+      [else
+        (cons (car my_list) (addultimo(cdr my_list) x))
+       ]
+      )
+    )
+  )
